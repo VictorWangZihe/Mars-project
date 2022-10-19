@@ -1,15 +1,18 @@
-#' Title
+#' Plot method of MARS (plot.mars)
 #'
+#' @description This is the plot method of mars. It plot the results of mars into several graphs.
 #' @param x the mars object return by mars
-#' @param ... generic parameter
+#' @param ... S3 generic parameter
 #'
-#' @return a few plots
+#' @details The plot method takes what returns by [mars()] and represents it in a visual way.
+#' @return a few plots that demonstrates how explanary variable fits in the MARS model.
 #' @export
 #'
 #' @examples
-#' mm <- mars(wage ~ age,data=ISLR::Wage)
-#' pm <- plot(mm)
+#' mymars <- mars(y~.,data = marstestdata)
+#' plotmars <- plot(mymars)
 #' @import graphics
+#' @author Zihe Wang, Tianle Zhong, Xiaoying Qian
 plot.mars = function(x,...)
 {
   data = eval(x$call$data)
@@ -21,7 +24,7 @@ plot.mars = function(x,...)
   Bf <- x$Bfuncs
   singleB <- which(sapply(Bf,function(x)NROW(x)==1))
   doubleB <- which(sapply(Bf,function(x)NROW(x)==2))
-  for(i in singleB){
+  for(i in singleB){    # the singe basis plot
     vv1 <- Bf[[i]][1,"v"]; varname1 <- x$x_names[[vv1]]
     xx <- seq(from=min(X[,vv1]),to=max(X[,vv1]),length=100)
     f <- function(x) {
@@ -29,7 +32,7 @@ plot.mars = function(x,...)
     yy <- f(xx)
     plot(xx,yy,main=varname1,type = "l",col="red",lwd=.1)
   }
-  for(i in doubleB){
+  for(i in doubleB){   # the double basis plot
     vv1 <- Bf[[i]][1,"v"]; varname1 <- x$x_names[[vv1]]
     vv2 <- Bf[[i]][2,"v"]; varname2 <- x$x_names[[vv2]]
     xx <- seq(from=min(X[,vv1]),to=max(X[,vv1]),length=100)

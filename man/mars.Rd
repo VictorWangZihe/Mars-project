@@ -7,20 +7,33 @@
 mars(formula, data, control = NULL, ...)
 }
 \arguments{
-\item{formula}{an R formula}
+\item{formula}{an R formula, should be looks like y ~ x or y ~ x1+x2+...+xn}
 
 \item{data}{a data frame containing the data for the model}
 
 \item{control}{an object of class 'mars.control'}
 
-\item{...}{the generic parameter}
+\item{...}{S3 generic parameter}
 }
 \value{
-an object of class 'mars
+an object of class 'mars' that contains the value like fitted value and coefficients after the algorithms.
 }
 \description{
-Multivariate Adaptive Regression Splines (MARS)
+This is the main MARs algorithm. It contains a few sub-functions like fwd_stepwise and bwd_stepwise selections, and it returns a mars object.
+}
+\details{
+The function takes in a formula, a set of data, a control variable, and then produces a statistical model that uses Multivariate Adaptive Regression Splines.
 }
 \examples{
- mm <- mars(wage ~ age,data=ISLR::Wage)
+ mymars <- mars(y~.,data = marstestdata)
+}
+\references{
+Jerome H. Friedman. "Multivariate Adaptive Regression Splines".
+The Annals of Statistics , Mar., 1991, Vol. 19, No. 1 (Mar., 1991), pp. 1-67
+}
+\seealso{
+\link{plot.mars} for plotting the results,\link{predict.mars} for predictions,and \link{summary.mars}/\link{print.mars} for summarizing and printing the mars object.
+}
+\author{
+Zihe Wang, Tianle Zhong, Xiaoying Qian
 }

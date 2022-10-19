@@ -2,22 +2,25 @@
 % Please edit documentation in R/summary.mars.R
 \name{summary.mars}
 \alias{summary.mars}
-\title{Title}
+\title{summary method for MARS (summary.mars)}
 \usage{
 \method{summary}{mars}(object, ...)
 }
 \arguments{
-\item{object}{the mars object return by mars}
+\item{object}{The MARS object return by mars() function.}
 
-\item{...}{generic parameter}
+\item{...}{S3 generic parameter}
 }
 \value{
-the summary of mars object
+A set of useful information of MARS object. Including coefficients, formula, variables, and Basis functions.
 }
 \description{
-Title
+This is the summary method for MARS alogrithm.
 }
 \examples{
-mm <- mars(wage ~ age,data=ISLR::Wage)
-sm <- summary(mm)
+mymars <- mars(y~.,data = marstestdata)
+summarymars <- summary(mymars)
+}
+\author{
+Zihe Wang, Tianle Zhong, Xiaoying Qian
 }

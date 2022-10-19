@@ -2,22 +2,28 @@
 % Please edit documentation in R/plot.mars.R
 \name{plot.mars}
 \alias{plot.mars}
-\title{Title}
+\title{Plot method of MARS (plot.mars)}
 \usage{
 \method{plot}{mars}(x, ...)
 }
 \arguments{
 \item{x}{the mars object return by mars}
 
-\item{...}{generic parameter}
+\item{...}{S3 generic parameter}
 }
 \value{
-a few plots
+a few plots that demonstrates how explanary variable fits in the MARS model.
 }
 \description{
-Title
+This is the plot method of mars. It plot the results of mars into several graphs.
+}
+\details{
+The plot method takes what returns by \code{\link[=mars]{mars()}} and represents it in a visual way.
 }
 \examples{
-mm <- mars(wage ~ age,data=ISLR::Wage)
-pm <- plot(mm)
+mymars <- mars(y~.,data = marstestdata)
+plotmars <- plot(mymars)
+}
+\author{
+Zihe Wang, Tianle Zhong, Xiaoying Qian
 }

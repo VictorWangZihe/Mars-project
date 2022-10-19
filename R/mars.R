@@ -1,26 +1,29 @@
 
 
 #' Multivariate Adaptive Regression Splines (MARS)
-#'
-#' @param formula an R formula
+#' @description This is the main MARs algorithm. It contains a few sub-functions like fwd_stepwise and bwd_stepwise selections, and it returns a mars object.
+#' @param formula an R formula, should be looks like y ~ x or y ~ x1+x2+...+xn
 #' @param data a data frame containing the data for the model
 #' @param control an object of class 'mars.control'
-#' @param ... the generic parameter
+#' @param ... S3 generic parameter
 #'
-#' @return an object of class 'mars
+#' @details The function takes in a formula, a set of data, a control variable, and then produces a statistical model that uses Multivariate Adaptive Regression Splines.
+#' @return an object of class 'mars' that contains the value like fitted value and coefficients after the algorithms.
 #' @export
 #'
+#' @seealso [plot.mars] for plotting the results,[predict.mars] for predictions,and [summary.mars]/[print.mars] for summarizing and printing the mars object.
 #' @examples
-#'  mm <- mars(wage ~ age,data=ISLR::Wage)
+#'  mymars <- mars(y~.,data = marstestdata)
 #' @import stats
-#' @import ISLR
+#' @author Zihe Wang, Tianle Zhong, Xiaoying Qian
+#' @references Jerome H. Friedman. "Multivariate Adaptive Regression Splines".
+#' The Annals of Statistics , Mar., 1991, Vol. 19, No. 1 (Mar., 1991), pp. 1-67
 mars <- function(formula, data, control = NULL,...){
   if (is.null(control) || missing(control)) {
     control <- mars.control()
   }
   cc <- match.call() # save the call
   mf <- model.frame(formula,data)
-  plotnames = colnames(mf)
   y <- model.response(mf)
   mt <- attr(mf, "terms")
   x <- model.matrix(mt, mf)[,-1, drop = FALSE]

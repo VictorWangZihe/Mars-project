@@ -1,30 +1,23 @@
-#' Title
+#' print method for MARS (print.mars)
 #'
-#' @param x the mars object return by mars
-#' @param ... generic parameter
+#' @description This is the print method for MARS that print a set of useful imformations.
+#' @param x The MARS object return by mars() function.
+#' @param ... S3 generic parameter
 #'
 #' @return print the coefficient of mars object
 #' @export
 #'
 #' @examples
-#' mm <- mars(wage ~ age,data=ISLR::Wage)
-#' pm <- print(mm)
+#' mymars <- mars(y~.,data = marstestdata)
+#' printmars <- print(mymars)
+#' @author Zihe Wang, Tianle Zhong, Xiaoying Qian
 print.mars = function(x,...)
 {
   coefs = x$coefficients
 
-  for(i in seq_along(coefs))
+  for(i in seq_along(coefs)) # print out the coefficients.
   {
-    if(i == 1) # ASSIGNING INTERCEPT
-    {
       temp = cat(paste0("B", as.character(i-1)))
       cat("\n", "Coefficients:",  temp, coefs[i], "\n")
-
-    }
-    else if(i > 1)
-    {
-      temp = cat(paste0("B", as.character(i-1)))
-      cat("\n", "Coefficients:", temp, coefs[i], "\n")
-    }
   }
 }

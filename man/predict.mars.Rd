@@ -2,24 +2,30 @@
 % Please edit documentation in R/predict.mars.R
 \name{predict.mars}
 \alias{predict.mars}
-\title{Title}
+\title{predict method for MARS (predict.mars)}
 \usage{
 \method{predict}{mars}(object, newdata, ...)
 }
 \arguments{
-\item{object}{the mars object return by mars}
+\item{object}{The mars object return by mars}
 
-\item{newdata}{a set of new data to predict on}
+\item{newdata}{A set of new data to predict with. If it is missing, then the method will using the old data from the MARS object.}
 
-\item{...}{generic parameter}
+\item{...}{S3 generic parameter}
 }
 \value{
 a list of data contain the predict values
 }
 \description{
-Title
+This is the predict method for MARS. It predicts the outcome of the MARS model based on a set of data.
+}
+\details{
+The predict method uses the statistic model from the MARS object and a set of new data to predict the future values.
 }
 \examples{
-mm <- mars(wage ~ age,data=ISLR::Wage)
-pm <- predict(mm)
+mymars <- mars(y~.,data = marstestdata)
+predictmars <- predict(mymars)
+}
+\author{
+Zihe Wang, Tianle Zhong, Xiaoying Qian
 }

@@ -1,16 +1,18 @@
-
-#' Title
+#' predict method for MARS (predict.mars)
 #'
-#' @param object the mars object return by mars
-#' @param newdata a set of new data to predict on
-#' @param ... generic parameter
+#' @description This is the predict method for MARS. It predicts the outcome of the MARS model based on a set of data.
+#' @param object The mars object return by mars
+#' @param newdata A set of new data to predict with. If it is missing, then the method will using the old data from the MARS object.
+#' @param ... S3 generic parameter
 #'
+#' @details The predict method uses the statistic model from the MARS object and a set of new data to predict the future values.
 #' @return a list of data contain the predict values
 #' @export
 #'
 #' @examples
-#' mm <- mars(wage ~ age,data=ISLR::Wage)
-#' pm <- predict(mm)
+#' mymars <- mars(y~.,data = marstestdata)
+#' predictmars <- predict(mymars)
+#' @author Zihe Wang, Tianle Zhong, Xiaoying Qian
 predict.mars = function(object,newdata,...) {
   if(missing(newdata) || is.null(newdata)) {
     X <- as.matrix(object$B)

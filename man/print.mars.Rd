@@ -2,22 +2,25 @@
 % Please edit documentation in R/print.mars.R
 \name{print.mars}
 \alias{print.mars}
-\title{Title}
+\title{print method for MARS (print.mars)}
 \usage{
 \method{print}{mars}(x, ...)
 }
 \arguments{
-\item{x}{the mars object return by mars}
+\item{x}{The MARS object return by mars() function.}
 
-\item{...}{generic parameter}
+\item{...}{S3 generic parameter}
 }
 \value{
 print the coefficient of mars object
 }
 \description{
-Title
+This is the print method for MARS that print a set of useful imformations.
 }
 \examples{
-mm <- mars(wage ~ age,data=ISLR::Wage)
-pm <- print(mm)
+mymars <- mars(y~.,data = marstestdata)
+printmars <- print(mymars)
+}
+\author{
+Zihe Wang, Tianle Zhong, Xiaoying Qian
 }
