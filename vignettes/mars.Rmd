@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 * Install the package from GitHub. First install and load the 'devtools' package and then install 'mars' with
 ```{r eval = FALSE}
-install_github(repo = "https://github.com/SFUStatgen/SFUStat360Projects",subdir = "Projects/Project13/mars")
+install_github(repo = "https://github.com/VictorWangZihe/Mars-project.git")
 ```
 
 * In case that the code above is not working. The one who already have the package can try code as following.
