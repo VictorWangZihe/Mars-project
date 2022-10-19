@@ -6,6 +6,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+# Fitting Multivariate Adapative Regression Spline (MARS) Models
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -14,6 +15,108 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+## Getting started
+
+* Install the package from GitHub. First install and load the 'devtools' package and then install 'mars' with
+```{r eval = FALSE}
+install_github(repo = "https://github.com/SFUStatgen/SFUStat360Projects",subdir = "Projects/Project13/mars")
+```
+
+* In case that the code above is not working. The one who already have the package can try code as following.
+```{r}
+library(devtools)
+load_all()
+```
+
+* Now load the package
+```{r}
 library(mars)
 ```
+
+
+## The MARS algorithm
+
+The MARS algorithm is a form of regression analysis introduced by Jerome H. Friedman in 1991. It is an extension of a common linear regression algorithm that takes care of nonlinearities and interactions between different variables.
+Like the common linear regression, we need to specify one response variable and a set of explanatory variables to make the model.
+Unlike the common linear regression, we will use the hinge function to count the nonlinear effect and hence produce a more actually statistical model.
+Within the algorithm, we will use fwd_stepwise selection and bwd_stepwise selection to decide when and which variable should apply the hinge function.
+
+## Preparing inputs
+
+There are two required and one optional input.
+1. An R formula is required to specify the response and explanatory variables.
+2. A data frame containing the data to analyze is required. For this example we will use the Wage data from the ISLR package.
+```{r}
+library(ISLR);data(Wage)
+myformula <- formula(wage ~ year + age + education)
+```
+3. The optional argument is a `mars.control` object. Users should use the constructor `mar.control()` to specify the three model fitting parameters.
+ * The parameter `Mmax` is final number of basis function. the default value is 2.
+ * The parameter `d` is the smoothing parameter the default value is 3.
+ * The parameter `trace` decides whether going to trace the algorithmn. the default value is `FALSE`
+```{r}
+mc <- mars.control(Mmax = 6)
+```
+ 
+## Calling `mars()`
+```{r}
+mm <- mars(myformula,Wage,mc)
+```
+
+## Using mars methods
+ * Printing a `mars` object
+ * The print method for mars is very like to the common print method. It will print out the coefficient of the mars object.
+ * An example output is at the end of this document.
+```{r eval=FALSE}
+print.mars(mm)
+```
+ * Get a summary
+ * The summary include a set of useful information of MARS object.
+ * Including coefficients, formula, variables, and Basis functions.
+ * An example output is at the end of this document.
+```{r eval=FALSE}
+summary.mars(mm)
+```
+ * Get a plot
+ * The plot method takes what returns by `mars()` and represents it in a visual way.
+ * An example output is at the end of this document.
+```{r eval=FALSE}
+plot.mars(mm)
+```
+ * Make predictions
+ * Unlike the above three methods, the `predict()` method in mars can take another variable `newdata`. It should be a set of data we want to predict.
+ * If you do not have an available set of new data, the `predict()` method will predict the old data that is available. 
+ * An example output is at the end of this document.
+```{r eval=FALSE}
+predict.mars(mm)
+```
+ 
+ 
+## Reference
+ * Jerome H. Friedman. "Multivariate Adaptive Regression Splines". The Annals of Statistics , Mar., 1991, Vol. 19, No. 1 (Mar., 1991), pp. 1-67
+
+
+## Example OutPut
+Below is the example outputs for all four methods.
+```{r}
+print.mars(mm)
+```
+
+```{r}
+summary.mars(mm)
+```
+
+```{r}
+plot.mars(mm)
+```
+
+* For prediction, it should return a set of data.
+* The document only show first 50 entries of that data.
+```{r}
+pm <- predict.mars(mm)
+head(pm, n = 50L)
+```
+
+
+
+
