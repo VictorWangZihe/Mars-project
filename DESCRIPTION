@@ -1,0 +1,28 @@
+Package: mars
+Title: Multivariate Adaptive Regression Splines (MARS)
+Version: 0.0.0.9000
+Authors@R: 
+   c(person("Victor","Wang",,"zwa129@sfu.ca",role = c("aut","cre")),
+     person("Xiaoying","Qian",,"xqa8@sfu.ca",role = "aut"),
+     person("Tianle","Zhong",,"tianlez@sfu.ca",role = "aut")
+   )
+Description: This package contains the MARS algorithm and its methods that are built on the basis of the article [Multivariate Adaptive Regression Splines] that is written by Jerome H. Friedman.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    ISLR,
+    stats,
+    graphics,
+    devtools,
+    qpdf
+Suggests: 
+    rmarkdown,
+    knitr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
+LazyData: true
